@@ -1,0 +1,37 @@
+{
+  "manifest_version": 1,
+  "id": "wake-on-lan",
+  "i18n": {
+    "default": {"name": "Wake on LAN", "description": "Sends a Wake-on-LAN magic packet to a saved or directly entered MAC address."},
+    "zh": {"name": "网络唤醒", "description": "向已保存或当场填写的 MAC 地址发送 Wake-on-LAN 魔术包。"},
+    "zh-TW": {"name": "網路喚醒", "description": "向已儲存或當場填寫的 MAC 位址傳送 Wake-on-LAN 魔術封包。"}
+  },
+  "version": "@VERSION@",
+  "api_version": 2,
+  "architecture": "@ARCH@",
+  "kind": "service",
+  "author": "OneKVM",
+  "homepage": "https://github.com/onekvm/onekvm-extension-wake-on-lan",
+  "entrypoint": "bin/onekvm-wake-on-lan",
+  "permissions": ["network"],
+  "capabilities": [],
+  "icon": {"source": "lucide", "name": "radio"},
+  "page": {"title": "Wake on LAN", "renderer": "vue", "entrypoint": "web/page.js", "icon": {"source": "lucide", "name": "radio"}},
+  "controller": {"runtime": "executable", "entrypoint": "bin/onekvm-wake-on-lan", "arguments": ["--controller"], "timeout_seconds": 5},
+  "methods": {"wake": {}},
+  "settings_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["devices_json"],
+    "properties": {
+      "devices_json": {
+        "type": "string", "title": "Saved devices", "default": "[]", "maxLength": 4096,
+        "i18n": {"default": "Saved devices", "zh": "已保存设备", "zh-TW": "已儲存裝置"}
+      }
+    }
+  },
+  "secret_fields": [],
+  "memory_budget": "512K",
+  "resource_limits": {"memory_max": "8M", "cpu_quota": "10%", "tasks_max": 4, "limit_nofile": 16},
+  "healthcheck": {"type": "exec", "command": ["bin/onekvm-wake-on-lan", "--health"], "timeout_seconds": 5}
+}

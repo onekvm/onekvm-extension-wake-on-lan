@@ -5,9 +5,9 @@ English | [简体中文](README.zh-CN.md)
 Wake computers and other network devices from OneKVM by sending a standard UDP
 Wake-on-LAN magic packet to a saved or directly entered MAC address.
 
-> **Build note:** This repository contains extension sources only. Release
-> packages are built by the OpenEmbedded recipes in `onekvm-distro`; this
-> repository does not provide a standalone release build.
+> **Build note:** The component-owned OpenEmbedded layer is in
+> `meta-onekvm-extension-wake-on-lan`. Release images and the fixed component
+> revision are still composed by `onekvm-distro`.
 
 ## Features
 

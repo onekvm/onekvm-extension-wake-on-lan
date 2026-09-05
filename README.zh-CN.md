@@ -5,8 +5,9 @@
 向已保存或临时填写的 MAC 地址发送标准 UDP Wake-on-LAN 魔术包，从
 OneKVM 唤醒计算机或其他网络设备。
 
-> **构建说明：** 本仓库只包含扩展源码。正式软件包由 `onekvm-distro` 中的
-> OpenEmbedded（OE）配方统一构建；本仓库不提供独立的正式构建流程。
+> **构建说明：** 组件自带的 OpenEmbedded layer 位于
+> `meta-onekvm-extension-wake-on-lan`。正式镜像组合与组件固定 revision 仍由
+> `onekvm-distro` 管理。
 
 ## 功能
 

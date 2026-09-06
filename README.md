@@ -6,7 +6,7 @@ Wake computers and other network devices from OneKVM by sending a standard UDP
 Wake-on-LAN magic packet to a saved or directly entered MAC address.
 
 > **Build note:** The component-owned OpenEmbedded layer is in
-> `oe-recipes/meta-onekvm-extension-wake-on-lan`. Release images and the fixed component
+> `oe-recipes`. Release images and the fixed component
 > revision are still composed by `onekvm-distro`.
 
 ## Features

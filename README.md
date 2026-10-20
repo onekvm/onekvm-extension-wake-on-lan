@@ -23,8 +23,8 @@ The package name is `onekvm-extension-wake-on-lan`. Install it through your
 OneKVM distribution package or image, then manage it with the plugin manager:
 
 ```sh
-onekvm-plugin-manager enable wake-on-lan
-onekvm-plugin-manager disable wake-on-lan
+onekvm-extension enable wake-on-lan
+onekvm-extension disable wake-on-lan
 ```
 
 ## Usage
@@ -36,6 +36,12 @@ starts a short sandboxed action only while it sends the magic packet.
 The target must support Wake-on-LAN and have it enabled in firmware and the
 operating system. UDP broadcasts are normally limited to the local network;
 routers and VLAN boundaries may require explicit forwarding configuration.
+
+The console toolbox also provides a **Wake on LAN** window with the same quick-wake field and saved device list. Pin it to the toolbar for direct access.
+
+The screen App is available when the extension is enabled. With a touch or
+rotary display it sends the packet to the first saved device; use the web page
+to change the saved-device order or send to a different MAC address.
 
 ## How it works
 

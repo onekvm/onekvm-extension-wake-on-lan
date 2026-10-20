@@ -278,6 +278,24 @@ bool ObjectString(std::string_view object, std::string_view key,
   return position == encoded.size();
 }
 
+// Return the first saved MAC address when the screen App invokes wake without
+// a text-entry capable control. The web page still supplies an explicit MAC;
+// this fallback makes the rotary/touch App useful with the saved-device list.
+bool FirstSavedMAC(std::string_view encoded, std::string &mac) {
+  std::size_t position = 0;
+  SkipWhitespace(encoded, position);
+  if (position >= encoded.size() || encoded[position++] != '[')
+    return false;
+  SkipWhitespace(encoded, position);
+  if (position >= encoded.size() || encoded[position] == ']')
+    return false;
+  const std::size_t begin = position;
+  if (!SkipJSONValue(encoded, position, 1))
+    return false;
+  const std::string_view item = encoded.substr(begin, position - begin);
+  return ObjectString(item, "mac", mac);
+}
+
 bool ParseMAC(std::string_view input, std::array<std::uint8_t, 6> &mac,
               std::string &normalized) {
   if (input.size() != 17)
@@ -371,6 +389,20 @@ bool Controller(std::string &error) {
     std::cout << R"({"actions":[]})";
     return true;
   }
+  if (method == "status") {
+    bool configured = false;
+    std::string_view settings;
+    std::string encoded;
+    std::size_t position = 0;
+    if (FindObjectMember(input, "settings", settings) &&
+        FindObjectMember(settings, "devices_json", settings) &&
+        ParseJSONString(settings, position, encoded)) {
+      std::string saved_mac;
+      configured = FirstSavedMAC(encoded, saved_mac);
+    }
+    std::cout << "{\"configured\":" << (configured ? "true" : "false") << "}";
+    return true;
+  }
   if (method != "wake") {
     error = "unknown public method " + method;
     return false;
@@ -380,6 +412,19 @@ bool Controller(std::string &error) {
   std::string_view request;
   if (FindObjectMember(input, "request", request))
     ObjectString(request, "mac", mac);
+  if (mac.empty()) {
+    std::string_view settings;
+    std::string encoded;
+    if (FindObjectMember(input, "settings", settings) &&
+        FindObjectMember(settings, "devices_json", settings)) {
+      std::size_t position = 0;
+      if (ParseJSONString(settings, position, encoded)) {
+        // The request parser has no user supplied text on the screen App, so
+        // use the first saved device as the one-tap target.
+        FirstSavedMAC(encoded, mac);
+      }
+    }
+  }
   std::array<std::uint8_t, 6> parsed{};
   std::string normalized;
   if (!ParseMAC(mac, parsed, normalized)) {

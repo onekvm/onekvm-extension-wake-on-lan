@@ -23,8 +23,8 @@ OneKVM 唤醒计算机或其他网络设备。
 或镜像安装，然后使用插件管理器控制扩展：
 
 ```sh
-onekvm-plugin-manager enable wake-on-lan
-onekvm-plugin-manager disable wake-on-lan
+onekvm-extension enable wake-on-lan
+onekvm-extension disable wake-on-lan
 ```
 
 ## 使用
@@ -45,3 +45,7 @@ onekvm-plugin-manager disable wake-on-lan
 
 本项目使用 GNU General Public License v3.0，完整条款见
 [`LICENSE`](LICENSE)。
+
+控制台工具箱也提供**网络唤醒**窗口，复用临时唤醒和已保存设备列表，可固定到工具栏。
+
+启用扩展后，屏幕 App 也会出现。触摸或旋钮操作会唤醒已保存列表中的第一台设备；需要更换目标顺序或填写其他 MAC 地址时，请使用网页端。

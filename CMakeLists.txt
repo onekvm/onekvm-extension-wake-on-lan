@@ -17,4 +17,6 @@ configure_file(manifest.json.in manifest.json @ONLY)
 
 install(TARGETS onekvm-wake-on-lan RUNTIME DESTINATION bin)
 install(FILES web/page.js DESTINATION web)
+install(FILES web/page.js DESTINATION web RENAME tool.js)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/manifest.json" DESTINATION .)
+install(DIRECTORY screen-app DESTINATION .)

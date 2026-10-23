@@ -1,5 +1,4 @@
-import type { Translator } from "./i18n";
-import type { Status } from "./types";
+import type { Status, Translator } from "@onekvm/screen-ui";
 
 export function statusLabel(state: Status, t: Translator): string {
   return t(state.configured ? "canWake" : "unconfigured");

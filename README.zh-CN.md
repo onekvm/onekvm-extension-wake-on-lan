@@ -49,3 +49,7 @@ onekvm-extension disable wake-on-lan
 控制台工具箱也提供**网络唤醒**窗口，复用临时唤醒和已保存设备列表，可固定到工具栏。
 
 启用扩展后，屏幕 App 也会出现。触摸或旋钮操作会唤醒已保存列表中的第一台设备；需要更换目标顺序或填写其他 MAC 地址时，请使用网页端。
+
+可选屏幕 App 的 TypeScript/TSX 源码位于
+[`screen-app/src`](screen-app/src)，按组件、状态和语言包拆分。
+构建方式见 [`screen-app/README.md`](screen-app/README.md)；JS/PAK 由打包流程生成，不提交到 Git。

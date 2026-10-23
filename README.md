@@ -53,3 +53,8 @@ running between wake requests.
 
 This project is licensed under the GNU General Public License v3.0. See
 [`LICENSE`](LICENSE).
+
+The optional screen App has modular TypeScript/TSX source in
+[`screen-app/src`](screen-app/src). See [`screen-app/README.md`](screen-app/README.md)
+for its components and build command. JS/PAK runtime files are generated during
+packaging and are not tracked in Git.

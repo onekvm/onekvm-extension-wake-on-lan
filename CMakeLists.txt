@@ -22,4 +22,5 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/manifest.json" DESTINATION .)
 set(ONEKVM_SCREEN_APP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/screen-app/dist" CACHE PATH
   "Directory containing the compiled screen App")
 install(FILES "${ONEKVM_SCREEN_APP_DIR}/main.vue-vapor.js"
-  "${ONEKVM_SCREEN_APP_DIR}/main.vue-vapor.pak" DESTINATION screen-app)
+  "${ONEKVM_SCREEN_APP_DIR}/main.vue-vapor.pak"
+  "${ONEKVM_SCREEN_APP_DIR}/icon.bin" DESTINATION screen-app)
